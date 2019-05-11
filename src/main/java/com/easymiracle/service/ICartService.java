@@ -2,6 +2,7 @@ package com.easymiracle.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.easymiracle.dto.CartDTO;
 import com.easymiracle.repository.entity.CartDO;
 
 /**
@@ -13,4 +14,5 @@ import com.easymiracle.repository.entity.CartDO;
  * @since 2019-05-10
  */
 public interface ICartService extends IService<CartDO> {
+    Integer addcart(CartDTO cartDTO);
 }
