@@ -1,9 +1,6 @@
 package com.easymiracle.repository.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -45,6 +42,29 @@ public class CartDO implements Serializable {
     @TableField("quantity")
     private Integer quantity;
 
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_date", fill = FieldFill.INSERT)
+    private LocalDateTime createDate;
+
+    /**
+     * 修改时间
+     */
+    @TableField(value = "update_date", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateDate;
+
+    /**
+     * 创建人
+     */
+    @TableField(value = "create_user", fill = FieldFill.INSERT)
+    private Integer createUser;
+
+    /**
+     * 修改人
+     */
+    @TableField(value = "update_user", fill = FieldFill.INSERT_UPDATE)
+    private Integer updateUser;
 
     public Integer getId() {
         return id;
@@ -77,18 +97,39 @@ public class CartDO implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public void setcreateUser(Integer u){
-        System.out.println(u);
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
-    public void setcreateDate(LocalDateTime d){
-        System.out.println(d);
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
-    public void setupdateDate(LocalDateTime d){
-        System.out.println(d);
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
     }
-    public void setupdateUser(int d){
-        System.out.println(d);
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
+
+    public Integer getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(Integer createUser) {
+        this.createUser = createUser;
+    }
+
+    public Integer getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(Integer updateUser) {
+        this.updateUser = updateUser;
+    }
+
     @Override
     public String toString() {
         return "CartDO{" +
@@ -96,6 +137,10 @@ public class CartDO implements Serializable {
                 ", userid=" + userid +
                 ", goodsid=" + goodsid +
                 ", quantity=" + quantity +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", createUser=" + createUser +
+                ", updateUser=" + updateUser +
                 '}';
     }
 }

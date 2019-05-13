@@ -110,5 +110,20 @@ CREATE TABLE cart(
 `user_id` int(11) NOT NULL  COMMENT '用户id',
 `goods_id` int(11) NOT NULL  COMMENT '商品id',
 `quantity` int(11) NOT NULL    COMMENT '数量',
+`create_date`  datetime NOT NULL COMMENT '创建时间',
+`update_date`  datetime NOT NULL COMMENT '修改时间',
+`create_user`  int NOT NULL COMMENT '创建人',
+`update_user`  int NOT NULL COMMENT '修改人',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS `product_SKU`;
+CREATE TABLE `product_SKU` (
+`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT ' 主键' ,
+`product_id`  int(11) NOT NULL COMMENT '商品id' ,
+`price`  int(11) NOT NULL COMMENT '价格' ,
+`stock`  int(11) NOT NULL COMMENT '库存' ,
+`model`  varchar(255) NOT NULL COMMENT '型号' ,
+`sele_amount`  int(11) NOT NULL COMMENT '销量' ,
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
