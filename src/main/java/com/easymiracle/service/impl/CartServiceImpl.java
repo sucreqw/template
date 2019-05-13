@@ -1,14 +1,16 @@
 package com.easymiracle.service.impl;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.easymiracle.info.CartInfo;
+import com.easymiracle.repository.entity.SysUserDO;
+import com.easymiracle.util.PageUtil;
 import org.springframework.beans.BeanUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.easymiracle.dto.CartDTO;
 import com.easymiracle.repository.dao.CartMapper;
 import com.easymiracle.repository.entity.CartDO;
 import com.easymiracle.service.ICartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.ws.soap.Addressing;
@@ -59,9 +61,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
         } else {
             cartDO=new CartDO();
             BeanUtils.copyProperties(cartDTO, cartDO);
-            /*cartDO.setUserid(cartDTO.getUserid());
-            cartDO.setGoodsid(cartDTO.getGoodsid());
-            cartDO.setQuantity(cartDTO.getQuantity());*/
+
             //插入商品到购物车
            baseMapper.insert(cartDO);
         }
@@ -70,18 +70,20 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
 
     @Override
     public void deleteItem(Integer id) {
-
+        baseMapper.deleteById(id);
     }
 
     @Override
-    public Integer updataItem(CartDTO cartDTO) {
+    public void updataItem(CartDTO cartDTO) {
         CartDO cartDO = new CartDO();
         BeanUtils.copyProperties(cartDTO, cartDO);
-        return baseMapper.updateById(cartDO);
+        baseMapper.updateById(cartDO);
     }
 
     @Override
-    public List<CartDTO> cartList() {
-        return null;
+    public Page<CartInfo> cartList(Integer page,Integer pageSize) {
+        QueryWrapper<CartDO> wrapper = new QueryWrapper<>();
+        Page<CartDO> cartDOPage = new Page<>(page, pageSize);
+        return PageUtil.buildPage(baseMapper.selectPage(cartDOPage, wrapper), CartInfo.class);
     }
 }
