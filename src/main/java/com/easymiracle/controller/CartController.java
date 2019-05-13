@@ -2,12 +2,10 @@ package com.easymiracle.controller;
 
 import com.easymiracle.dto.CartDTO;
 import com.easymiracle.dto.CommonResult;
+import com.easymiracle.enums.ResultCodeEnum;
 import com.easymiracle.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,10 +23,20 @@ public class CartController {
     private ICartService iCartService;
 
     @PostMapping("/addcart")
-    public CommonResult<Integer> addcart(CartDTO cartDTO) {
+    public CommonResult<Integer> addcart(@RequestBody CartDTO cartDTO) {
         CommonResult<Integer> result = new CommonResult<>();
-        Integer id = iCartService.addcart(cartDTO);
-        result.setData(id);
+        if (null!=cartDTO) {
+            if(cartDTO.getQuantity()>0) {
+                Integer id = iCartService.addCart(cartDTO);
+                result.setData(id);
+            }else{
+                result.setCode(500);
+                result.setMessage("数量少于1！");
+            }
+        }else{
+            result.setCode(500);
+            result.setMessage("对象不能为空！");
+        }
         return result;
     }
 }

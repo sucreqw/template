@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author sucre chen 906509023@qq.com
@@ -43,6 +45,7 @@ public class CartDO implements Serializable {
     @TableField("quantity")
     private Integer quantity;
 
+
     public Integer getId() {
         return id;
     }
@@ -74,7 +77,18 @@ public class CartDO implements Serializable {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
+    public void setcreateUser(Integer u){
+        System.out.println(u);
+    }
+    public void setcreateDate(LocalDateTime d){
+        System.out.println(d);
+    }
+    public void setupdateDate(LocalDateTime d){
+        System.out.println(d);
+    }
+    public void setupdateUser(int d){
+        System.out.println(d);
+    }
     @Override
     public String toString() {
         return "CartDO{" +
